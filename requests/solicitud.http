@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+
+### =====================================================
+### SOLICITUDES
+### =====================================================
+
+
+### Crear solicitud
+POST {{baseUrl}}/solicitudes
+Content-Type: application/json
+
+{
+  "nombreCompleto": "Juan Pérez García",
+  "documentoIdentidad": "1234567890",
+  "institucionEducativa": "Universidad Nacional de Colombia",
+  "programaAcademico": "Ingeniería de Sistemas",
+  "montoSolicitado": 5000000
+}
+
+
+### Obtener solicitud por ID
+GET {{baseUrl}}/solicitudes/1
+
+
+### Obtener solicitudes del usuario
+GET {{baseUrl}}/solicitudes

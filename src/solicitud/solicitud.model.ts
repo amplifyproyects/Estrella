@@ -5,20 +5,43 @@ import {
   DataType,
   PrimaryKey,
   AutoIncrement,
+  AllowNull,
   ForeignKey,
   BelongsTo,
-  AllowNull,
   CreatedAt,
   UpdatedAt,
 } from 'sequelize-typescript';
 
 import { Usuario } from '../usuarios/usuario.model';
 
+export enum EstadoSolicitud {
+  PENDIENTE = 'PENDIENTE',
+  EN_REVISION = 'EN_REVISION',
+  APROBADA = 'APROBADA',
+  RECHAZADA = 'RECHAZADA',
+}
+
+interface SolicitudAttributes {
+  id?: number;
+  usuarioId: number;
+  nombreCompleto: string;
+  documentoIdentidad: string;
+  institucionEducativa: string;
+  programaAcademico: string;
+  montoSolicitado: number;
+  videoUrl?: string | null;
+  estado?: EstadoSolicitud;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+
+
 @Table({
   tableName: 'solicitudes',
   timestamps: true,
 })
-export class Solicitud extends Model<Solicitud> {
+export class Solicitud extends Model<SolicitudAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -52,22 +75,20 @@ export class Solicitud extends Model<Solicitud> {
   @Column(DataType.DECIMAL(15, 2))
   declare montoSolicitado: number;
 
-  @AllowNull(false)
-  @Column(DataType.STRING(500))
-  declare videoUrl: string;
+  @AllowNull(true)
+  @Column({
+    type: DataType.STRING(500),
+    allowNull: true,
+  })
+  declare videoUrl: string | null;
 
   @AllowNull(false)
-  @Column(DataType.STRING(255))
-  declare videoKey: string;
-
-  @AllowNull(false)
-  @Column(DataType.STRING(20))
-  declare videoMimeType: string;
-
-  @AllowNull(false)
-  @Column(DataType.BIGINT)
-  declare videoSize: number;
-
+  @Column({
+    type: DataType.ENUM(...Object.values(EstadoSolicitud)),
+    defaultValue: EstadoSolicitud.PENDIENTE,
+  })
+  declare estado: EstadoSolicitud;
+  
   @CreatedAt
   declare createdAt: Date;
 

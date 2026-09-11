@@ -1,4 +1,22 @@
-import { Controller } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+} from '@nestjs/common';
 
-@Controller('solicitud')
-export class SolicitudController {}
+import { SolicitudService } from './solicitud.service';
+import { CrearSolicitudDto } from './crear-solicitud.dto';
+
+@Controller('solicitudes')
+export class SolicitudController {
+  constructor(
+    private readonly solicitudService: SolicitudService,
+  ) {}
+
+  @Post()
+  async crear(
+    @Body() dto: CrearSolicitudDto,
+  ) {
+    return this.solicitudService.crear(1, dto);
+  }
+}

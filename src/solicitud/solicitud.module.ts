@@ -1,9 +1,27 @@
 import { Module } from '@nestjs/common';
-import { SolicitudService } from './solicitud.service';
+import { SequelizeModule } from '@nestjs/sequelize';
+
+import { Solicitud } from './solicitud.model';
 import { SolicitudController } from './solicitud.controller';
+import { SolicitudService } from './solicitud.service';
 
 @Module({
-  providers: [SolicitudService],
-  controllers: [SolicitudController]
+  imports: [
+    SequelizeModule.forFeature([
+      Solicitud,
+    ]),
+  ],
+
+  controllers: [
+    SolicitudController,
+  ],
+
+  providers: [
+    SolicitudService,
+  ],
+
+  exports: [
+    SolicitudService,
+  ],
 })
 export class SolicitudModule {}
