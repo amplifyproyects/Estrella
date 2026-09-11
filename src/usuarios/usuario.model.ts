@@ -11,11 +11,20 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 
+interface UsuarioAttributes {
+  id?: number;
+  correo: string;
+  contraseña: string;
+  nombreCompleto: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 @Table({
   tableName: 'usuarios',
   timestamps: true,
 })
-export class Usuario extends Model<Usuario> {
+export class Usuario extends Model<UsuarioAttributes> {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -23,15 +32,11 @@ export class Usuario extends Model<Usuario> {
 
   @Unique
   @AllowNull(false)
-  @Column({
-    type: DataType.STRING(255),
-  })
+  @Column(DataType.STRING(255))
   declare correo: string;
 
   @AllowNull(false)
-  @Column({
-    type: DataType.STRING(255),
-  })
+  @Column(DataType.STRING(255))
   declare contraseña: string;
 
   @AllowNull(false)

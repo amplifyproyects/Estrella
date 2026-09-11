@@ -1,0 +1,45 @@
+@baseUrl = http://localhost:3000/usuario
+
+
+### Registrar usuario
+POST {{baseUrl}}/registro
+Content-Type: application/json
+
+{
+  "correo": "juan.perez@gmail.com",
+  "contraseña": "MiClave123!",
+  "nombreCompleto": "Juan Pérez"
+}
+
+
+### Correo inválido
+POST {{baseUrl}}/registro
+Content-Type: application/json
+
+{
+  "correo": "correo-invalido",
+  "contraseña": "MiClave123!",
+  "nombreCompleto": "Juan Pérez"
+}
+
+
+### Contraseña inválida
+POST {{baseUrl}}/registro
+Content-Type: application/json
+
+{
+  "correo": "juan2@gmail.com",
+  "contraseña": "password",
+  "nombreCompleto": "Juan Pérez"
+}
+
+
+### Correo duplicado
+POST {{baseUrl}}/registro
+Content-Type: application/json
+
+{
+  "correo": "juan.perez@gmail.com",
+  "contraseña": "OtraClave123!",
+  "nombreCompleto": "Otro Usuario"
+}
