@@ -10,7 +10,7 @@ import { Solicitud } from './solicitud/solicitud.model';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { SolicitudModule } from './solicitud/solicitud.module';
 import { AuthModule } from './auth/auth.module';
-import { UsuarioService } from './usuario/usuario.service';
+import { UsuariosService } from './usuarios/usuarios.service';
 
 @Module({
   imports: [
@@ -47,6 +47,6 @@ import { UsuarioService } from './usuario/usuario.service';
       Solicitud,
     ]),
   ],
-  providers: [UsuarioService],
+  providers: [UsuariosService],
 })
 export class AppModule {}
