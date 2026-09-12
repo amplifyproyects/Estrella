@@ -24,6 +24,7 @@ export class SolicitudService {
   async crear(
     usuarioId: number,
     dto: CrearSolicitudDto,
+      video: Express.Multer.File,
   ) {
     const transaction =
       await this.sequelize.transaction();
@@ -48,6 +49,8 @@ export class SolicitudService {
 
             montoSolicitado:
               dto.montoSolicitado,
+
+            videoUrl: video.filename,
           },
           {
             transaction,
@@ -69,7 +72,7 @@ export class SolicitudService {
           solicitud.programaAcademico,
         montoSolicitado:
           solicitud.montoSolicitado,
-        videoUrl: solicitud.videoUrl,
+        videoUrl: `/solicitudes/${solicitud.id}/video`,
         createdAt: solicitud.createdAt,
         estado: solicitud.estado
       };

@@ -6,8 +6,8 @@ POST {{baseUrl}}usuario/registro
 Content-Type: application/json
 
 {
-  "correo": "juan.perez@gmail.com",
-  "contraseña": "MiClave123!",
+  "correo": "ccc@ccc.com",
+  "contraseña": "1",
   "nombreCompleto": "Juan Pérez"
 }
 
