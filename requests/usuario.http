@@ -1,6 +1,4 @@
 @baseUrl = http://localhost:3000/
-
-
 ### Registrar usuario
 POST {{baseUrl}}usuario/registro
 Content-Type: application/json
@@ -16,6 +14,6 @@ POST {{baseUrl}}auth/login
 Content-Type: application/json
 
 {
-  "correo": "juan.perez@gmail.com",
-  "contraseña": "MiClave123!"
+  "correo": "cc@cc.com",
+  "contraseña": "cc"
 }

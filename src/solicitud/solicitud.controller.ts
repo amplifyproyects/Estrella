@@ -7,7 +7,8 @@ import {
   Req,
   UploadedFile,
   UseInterceptors,
-  Body
+  Body,
+  UseGuards
 } from '@nestjs/common';
 
 import { SolicitudService } from './solicitud.service';
@@ -18,7 +19,11 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { randomUUID } from 'crypto';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+
 @Controller('solicitudes')
+@UseGuards(JwtAuthGuard) 
 export class SolicitudController {
   constructor(
     private readonly solicitudService: SolicitudService,
@@ -77,9 +82,9 @@ export class SolicitudController {
   @Post()
   async crear(
     @Body() dto: CrearSolicitudDto,
-
     @UploadedFile()
     video: Express.Multer.File,
+    @GetUser('id') usuarioId: number,
   ) {
     if (!video) {
       throw new BadRequestException(
@@ -88,10 +93,18 @@ export class SolicitudController {
     }
 
     return this.solicitudService.crear(
-      1,
+      usuarioId,
       dto,
       video,
     );
   }
-  
+
+  @Get()
+  async listarPorUsuario(@Req() req: any) {
+    return this.solicitudService.listarPorUsuario(
+      req.user.id,
+    );
+  }
+
+
 }
