@@ -88,7 +88,7 @@ export const solicitudesService = {
    */
   crearSolicitud: async (datos: SolicitudRequest): Promise<SolicitudResponse> => {
     const formData = new FormData();
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
 
     formData.append('nombreCompleto', datos.nombreCompleto);
     formData.append('documentoIdentidad', datos.documentoIdentidad);
